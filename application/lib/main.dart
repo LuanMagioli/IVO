@@ -1,5 +1,9 @@
+import 'package:application/routes/authentication/view/authentication_binding.dart';
 import 'package:application/routes/authentication/view/authentication_view.dart';
+import 'package:application/routes/home/view/home_binding.dart';
 import 'package:application/routes/home/view/home_view.dart';
+import 'package:application/routes/profile/controller/profile_controller.dart';
+import 'package:application/routes/profile/view/profile_binding.dart';
 import 'package:application/routes/profile/view/profile_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +19,6 @@ void main() async {
 initServices() async {
   print('starting services ...');
   await GetStorage.init();
-  //await Get.putAsync(() => LocalStorageService().init());
   print('All services started...');
 }
 
@@ -28,15 +31,22 @@ class Routes extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: "/",
       getPages: [
-        GetPage(name: '/', page: () => Home(), transition: Transition.downToUp),
+        GetPage(
+          name: '/',
+          page: () => HomeView(),
+          transition: Transition.downToUp,
+          binding: HomeBinding(),
+        ),
         GetPage(
           name: '/authentication/',
           page: () => AuthenticationView(),
+          binding: AuthenticationBinding(),
           transition: Transition.upToDown,
         ),
         GetPage(
             name: '/profile/',
             page: () => ProfileView(),
+            binding: ProfileBinding(),
             transition: Transition.upToDown),
       ],
     );
